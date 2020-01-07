@@ -28,24 +28,24 @@ The initial version is `0`. It's only for test at this moment.
 
 ## Hooks
 
-Following hooks are attached to MyBB's `global_start` hook.
-- `cloudflare_helper_global_start`
+Following hooks are attached to MyBB's `global_start` hook:
+- `cloudflare_helper_global_start`\
   `cloudflare_helper_global_start_end`
 
-- `cloudflare_helper_global_start_NOTFROMCF`
-  `cloudflare_helper_global_start_end_NOTFROMCF`
+- `cloudflare_helper_global_start_NOTFROMCF`\
+  `cloudflare_helper_global_start_end_NOTFROMCF`\
   The request is made from outside the Cloudflare network.
   
-- `cloudflare_helper_global_start_NOCOUNTRY`
-  `cloudflare_helper_global_start_end_NOCOUNTRY`
+- `cloudflare_helper_global_start_NOCOUNTRY`\
+  `cloudflare_helper_global_start_end_NOCOUNTRY`\
   Cloudflare can't detect the country where the request is made from. See also [Configuring Cloudflare IP Geolocation](https://support.cloudflare.com/hc/en-us/articles/200168236-What-does-Cloudflare-IP-Geolocation-do-).
   
-- `cloudflare_helper_global_start_FROMTOR`
-  `cloudflare_helper_global_start_end_FROMTOR`
+- `cloudflare_helper_global_start_FROMTOR`\
+  `cloudflare_helper_global_start_end_FROMTOR`\
   The request is made from Tor network through the Cloudflare network.
   
-- `cloudflare_helper_global_start_{CC_CODE}`
-  `cloudflare_helper_global_start_end_{CC_CODE}`
+- `cloudflare_helper_global_start_{CC_CODE}`\
+  `cloudflare_helper_global_start_end_{CC_CODE}`\
   The request comes from a country with country code [`{CC_CODE}`](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). See [Configuring Cloudflare IP Geolocation](https://support.cloudflare.com/hc/en-us/articles/200168236-What-does-Cloudflare-IP-Geolocation-do-).
 
 ## TODO
@@ -56,6 +56,7 @@ Following hooks are attached to MyBB's `global_start` hook.
 ## About "Cloudflare Enhancer"
 
 The "Cloudflare Enhancer" plugin is a demo to show how this Cloudflare Helper works by displaying some information below MyBB's debug stuff (normally at the page bottom).
+
 _**Note:**_ You need to enable **"Advanced Stats / Debug information"** (in "Board Settings >> Server and Optimization Options" setting group) for MyBB to show MyBB's debug stuff.
 
 ## License
