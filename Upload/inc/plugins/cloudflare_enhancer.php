@@ -25,14 +25,6 @@ if(!defined('CLOUDFLARE_HELPER_PLUGIN'))
 }
 
 /**
- * Privileged access: comma separated user ids.
- */
-define('CLOUDFLARE_ENHANCER_ENABLED_FOR_USERS', '1,285');
-/**
- * Privileged access: comma separated usergroup ids.
- */
-define('CLOUDFLARE_ENHANCER_ENABLED_FOR_USERGROUPSS', '');
-/**
  * Inline styles for showing a debug info below MyBB's <debugstuff>.
  */
 define('CLOUDFLARE_ENHANCER_DEBUG_INLINE_STYLE', "<style>/*#debug:after {clear: right;}*/ #cloudflare_enhancer_debug {clear: right; float: right; text-align: right; font-size: 11px;}</style>");
@@ -50,7 +42,7 @@ function cloudflare_enhancer_info()
 		'website'		=> 'https://github.com/yuliu/mybb-plugin-cloudflare-helper',
 		'author'		=> 'Yu \'noyle\' Liu',
 		'authorsite'	=> 'https://github.com/yuliu/mybb-plugin-cloudflare-helper',
-		'version'		=> '0',
+		'version'		=> '0.1',
 		'compatibility'	=> '18*',
 		'codename'		=> 'noyle-cloudflare_enhancer'
 	);
@@ -81,15 +73,16 @@ function cloudflare_enhancer_check_dependency()
 
 function cloudflare_enhancer_add_hook_to_debugstuff()
 {
-	$cf_cc = cloudflare_helper_get_cc();
+	global $mybb_plugin_cloudflare_helper;
+	$cf_cc = $mybb_plugin_cloudflare_helper->get_country_code();
 
 	global $plugins;
 
-	if(!empty(cloudflare_helper_get_cc()) && function_exists('cloudflare_enhancer_hook_'.$cf_cc))
+	if(!empty($cf_cc) && function_exists('cloudflare_enhancer_hook_'.$cf_cc))
 	{
 		$plugins->add_hook('cloudflare_helper_global_start_'.$cf_cc, 'cloudflare_enhancer_hook_'.$cf_cc);
 	}
-	else if(cloudflare_helper_from_tor())
+	else if($mybb_plugin_cloudflare_helper->is_from_tor())
 	{
 		$plugins->add_hook('cloudflare_helper_global_start_end_FROMTOR', 'cloudflare_enhancer_hook_FROMTOR');
 	}
@@ -167,6 +160,6 @@ function cloudflare_enhancer_print_country_welcome_NOTFROMCF(&$content)
 
 function cloudflare_enhancer_print_country_welcome_FROMTOR(&$content)
 {
-	$welcome = "<debugstuff>\n<div id=\"cloudflare_enhancer_debug\">Welcome, strager from the void!<br />You're accessing it from a Tor network.</div>";
+	$welcome = "<debugstuff>\n<div id=\"cloudflare_enhancer_debug\">Welcome, stranger from the void!<br />You're accessing it from a Tor network.</div>";
 	$content = str_replace('<debugstuff>', $welcome, $content);
 }
